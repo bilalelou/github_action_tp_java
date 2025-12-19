@@ -32,5 +32,3 @@ jobs:
               with:
                   name: calculator-jar
                   path: target/*.jar
-
-
