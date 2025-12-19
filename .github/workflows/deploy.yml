@@ -34,6 +34,3 @@ jobs:
               run: |
                   echo "Deploying application..."
                   echo "Deployment complete!"
-              run: |
-                  echo "Deploying application..."
-                  echo "Deployment complete!"
