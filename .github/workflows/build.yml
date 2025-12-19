@@ -1,12 +1,7 @@
 name: Build
 
 on:
-    push:
-        branches:
-            - main
-    pull_request:
-        branches:
-            - main
+    workflow_call:
 
 jobs:
     build:
@@ -25,7 +20,7 @@ jobs:
 
             - name: Build with Maven
               run: mvn clean compile
-            
+
             - name: Package application
               run: mvn package -DskipTests
 
@@ -34,5 +29,3 @@ jobs:
               with:
                   name: calculator-jar
                   path: target/*.jar
-
-    

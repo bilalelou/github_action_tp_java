@@ -1,15 +1,24 @@
-name: Deploy
+name: CI/CD Pipeline
 
 on:
-    workflow_run:
-        workflows: ["Test"]
-        types:
-            - completed
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
 
 jobs:
+    build:
+        uses: ./.github/workflows/build.yml
+
+    test:
+        needs: build
+        uses: ./.github/workflows/test.yml
+
     deploy:
+        needs: test
         runs-on: ubuntu-latest
-        if: github.ref == 'refs/heads/main'
 
         steps:
             - name: Download artifact
@@ -24,10 +33,7 @@ jobs:
             - name: Deploy application
               run: |
                   echo "Deploying application..."
-                  echo "Artifact ready for deployment"
-                  # Add your deployment commands here
-                  # Examples:
-                  # - Deploy to AWS EC2
-                  # - Deploy to Azure App Service
-                  # - Deploy to Docker registry
-                  # - Deploy to Kubernetes
+                  echo "Deployment complete!"
+              run: |
+                  echo "Deploying application..."
+                  echo "Deployment complete!"
